@@ -1,0 +1,12 @@
+<div class="card">
+  <img class="productPhoto" src="{{ product.photo }}" />
+  <div class="productDetails">
+    <span class="productName">{{ product.name }}</span>
+    <span class="productPrice">€ {{ product.price }}</span>
+  </div>
+  <div class="button" (click)="addToCart(product)">
+    <span>
+      ADD TO CART
+    </span>
+  </div>
+</div>

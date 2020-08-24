@@ -1,0 +1,64 @@
+<app-header [items]="(this.checkout$ | async).items"></app-header>
+
+<h2 class="center">Cart</h2>
+<hr />
+
+<div class="content">
+  <div class="flex col" style="min-width: 65vw;">
+    <ng-container
+      *ngIf="(this.checkout$ | async).products.length > 0; else placeholder"
+    >
+      <div
+        class="products"
+        *ngFor="let item of (this.checkout$ | async).products"
+      >
+        <img class="productPhoto" src="{{ item.product.photo }}" />
+        <div class="flex col grow">
+          <span class="productName">{{ item.product.name }}</span>
+          <div class="flex">
+            <div class="flex">
+              <button (click)="updateQuantity(item.product, true)">-</button>
+              <input [value]="item.quantity" type="number" id="counter" />
+              <button (click)="updateQuantity(item.product)">+</button>
+            </div>
+            <img
+              (click)="removeProduct(item.product)"
+              src="assets/trash.svg"
+              class="trashIcon"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="productSubtotal">€ {{ item.subTotal }}</div>
+          <div class="subtitle">Sub-total</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="total flex col">
+    <span class="bolder">Order detail</span>
+    <div class="flex spacer">
+      <span class="subtitle">Delivery</span>
+      <span class="deliveryPrice">€ 00.00</span>
+    </div>
+    <div class="flex spacer">
+      <div class="bolder">Total</div>
+      <div class="bolder">€ {{ (checkout$ | async).total }}</div>
+    </div>
+    <div class="flex col">
+      <span class="button">CHECKOUT</span>
+      <span class="continue" routerLink="/">CONTINUE TO SHOP</span>
+    </div>
+  </div>
+</div>
+
+<ng-template #placeholder>
+  <div class="products flex col">
+    <h2>You dont have any products on your cart yet.</h2>
+    <div>
+      <span class="button" style="width: 200px;" routerLink="/"
+        >BROWSE SHOP</span
+      >
+    </div>
+  </div>
+</ng-template>

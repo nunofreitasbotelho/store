@@ -1,0 +1,12 @@
+<app-header [items]="this.items$ | async"></app-header>
+
+<h2 class="center">Popular Products</h2>
+<hr />
+<div class="content">
+  <app-product-item
+    *ngFor="let product of products$ | async"
+    [product]="product"
+    (onAddToCart)="addToCart($event)"
+  ></app-product-item>
+</div>
+<div id="snackbar" *ngIf="showNotification">Product added to the cart!</div>

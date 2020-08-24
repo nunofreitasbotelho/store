@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <img class="logo" src="assets/logo.svg" routerLink="/" />
+  <div class="nav-items">
+    <span class="productsLink" routerLink="/">Products</span>
+    <div class="cart">
+      <span>
+        <img src="assets/cart.svg" routerLink="/checkout" value="4" />
+        <ng-content *ngIf="items > 0; then badge"></ng-content>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<ng-template #badge
+  ><i class="logo-badge">{{ items }}</i></ng-template
+>
